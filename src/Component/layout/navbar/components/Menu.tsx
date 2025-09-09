@@ -16,7 +16,7 @@ const Menu = () => {
     <div className="bg-[#f0f2f3]">
       <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4">
         {/* Use justify-between to space out Logo, Search, and Icons */}
-        <div className="flex flex-row items-center justify-between w-full gap-3 sm:gap-6">
+        <div className="flex flex-row items-center justify-between w-full gap-3 py-3 sm:gap-6">
           {/* Logo Section */}
           <div className="flex justify-center sm:justify-start w-auto flex-shrink-0">
             <Logo />

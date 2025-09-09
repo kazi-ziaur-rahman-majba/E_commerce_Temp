@@ -19,7 +19,7 @@ const Header = () => {
 
     return (
         <header className="py-1 w-full bg-[#272343] text-white">
-            <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-1 md:px-4">
+            <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-1 md:px-4 py-1.5">
                 <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 sm:gap-0">
                     <div className="hidden sm:block text-center">
                         <Marquee speed={100} gradient={false} pauseOnHover={true} direction="right" className="text-xs md:text-sm">

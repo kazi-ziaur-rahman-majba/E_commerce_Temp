@@ -3,10 +3,6 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { MdShoppingCart } from "react-icons/md";
-import { useCartStore } from "../../../../store/cartStore";
-// import { TbCurrencyTaka } from "react-icons/tb";
-
 
 interface ChildSubCategory {
     name: string;
@@ -27,10 +23,10 @@ interface Category {
 
 const NAV_LINKS = [
     { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/contact", label: "Contact" },
-    { path: "/blog", label: "Blog" },
-    { path: "/faq", label: "FAQ" },
+    { path: "/about", label: "Shop" },
+    { path: "/contact", label: "Product" },
+    { path: "/blog", label: "Pages" },
+    { path: "/faq", label: "About" },
 ];
 
 const NavBar = () => {
@@ -106,32 +102,28 @@ const NavBar = () => {
         }
     };
 
-    const cartCount = useCartStore((state) =>
-        state.cart.reduce((total, item) => total + item.quantity, 0)
-    );
-
     return (
         <div className="relative">
-            <div className={`w-full z-50 bg-[var(--color-primary)] transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 shadow-md' : 'relative'}`}>
-                <div className="flex flex-col sm:flex-row max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto  items-center px-6 sm:px-3 py-1.5 rounded-lg gap-4 sm:gap-0">
+            <div className={`w-full z-50 bg-white transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 shadow-md' : 'relative'}`}>
+                <div className="flex flex-col sm:flex-row max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto  items-center px-6 sm:px-3 py-4 rounded-lg gap-4 sm:gap-0">
 
                     <div className="flex items-center justify-between w-full sm:w-auto ml-2.5 mr-5">
                         <button
-                            className="flex items-center gap-2 py-2 hover:text-black rounded-md cursor-pointer transition-colors duration-200"
+                            className="flex items-center gap-2 py-2 hover:text-[color:var(--color-primary)] rounded-md cursor-pointer transition-colors duration-200"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-expanded={isMenuOpen}
                             aria-label="Toggle Categories Menu"
                         >
                             <div className="flex items-center">
-                                <span className="text-xl font-medium text-white">Categories</span>
-                                <RiArrowDropDownLine className="text-3xl text-white " />
+                                <span className="text-xl text-black">Categories</span>
+                                <RiArrowDropDownLine className="text-3xl text-black " />
                             </div>
                         </button>
 
                         <div className="block sm:hidden">
                             <button
                                 onClick={() => setIsNavOpen(!isNavOpen)}
-                                className="text-white transition-all duration-200"
+                                className="text-black transition-all duration-200"
                                 aria-label="Toggle Navigation"
                             >
                                 {isNavOpen ? (
@@ -158,7 +150,7 @@ const NavBar = () => {
                                     >
                                         <Link
                                             to={category.link || ""}
-                                            className="flex justify-between items-center px-5 py-3 text-black hover:text-white hover:bg-[#064490] transition-all duration-200"
+                                            className="flex justify-between items-center px-5 py-3 text-black hover:text-[color:var(--color-primary)] hover:bg-[#064490] transition-all duration-200"
                                             onClick={(e) => handleCategoryClick(idx, e, category.subcategories.length > 0)}
                                         >
                                             <span className="text-base font-medium">
@@ -166,7 +158,7 @@ const NavBar = () => {
                                             </span>
                                             {category.subcategories.length > 0 && (
                                                 <RiArrowDropDownLine
-                                                    className={`text-xl text-gray-500 group-hover:text-white transition-transform duration-200 ${activeCategory === idx ? "rotate-180" : "rotate-0"}`}
+                                                    className={`text-xl text-gray-500 group-hover:text-[color:var(--color-primary)] transition-transform duration-200 ${activeCategory === idx ? "rotate-180" : "rotate-0"}`}
                                                 />
                                             )}
                                         </Link>
@@ -183,7 +175,7 @@ const NavBar = () => {
                                                         >
                                                             <Link
                                                                 to={subItem.link || ""}
-                                                                className="flex justify-between items-center px-5 py-3 text-black hover:text-white hover:bg-[#064490] transition-all duration-200"
+                                                                className="flex justify-between items-center px-5 py-3 text-black hover:text-[color:var(--color-primary)] hover:bg-[#064490] transition-all duration-200"
                                                                 onClick={(e) => handleSubCategoryClick(subIdx, e, (subItem["child-subcategories"]?.length ?? 0) > 0)}
                                                             >
                                                                 <span className="text-base font-medium">
@@ -191,7 +183,7 @@ const NavBar = () => {
                                                                 </span>
                                                                 {(subItem["child-subcategories"]?.length ?? 0) > 0 && (
                                                                     <RiArrowDropDownLine
-                                                                        className={`text-xl text-gray-500 transition-transform duration-200 ${activeSubCategory === subIdx ? "rotate-180" : "rotate-0"}`}
+                                                                        className={`text-xl text-gray-500 transition-transform duration-200 ${activeSubCategory === subIdx ? "rotate-180" : "rotate-0"} group-hover:text-[color:var(--color-primary)]`}
                                                                     />
                                                                 )}
                                                             </Link>
@@ -203,7 +195,7 @@ const NavBar = () => {
                                                                             <Link
                                                                                 key={`child-${childIdx}`}
                                                                                 to={childItem.link || ""}
-                                                                                className="block px-5 py-3 text-black hover:text-white hover:bg-[#064490] transition-all duration-200"
+                                                                                className="block px-5 py-3 text-black hover:text-[color:var(--color-primary)] hover:bg-[#064490] transition-all duration-200"
                                                                                 onClick={() => setIsMenuOpen(false)}
                                                                             >
                                                                                 {childItem.name}
@@ -224,46 +216,35 @@ const NavBar = () => {
                     )}
 
                     <div className="w-full flex justify-between items-center">
-                        <ul className="hidden sm:flex gap-6 text-white text-sm font-medium">
+                        <ul className="hidden sm:flex gap-6 text-black text-sm font-medium">
                             {NAV_LINKS.map(({ path, label }) => (
                                 <NavLink
                                     key={path}
                                     to={path}
-                                    className="relative px-2 transition-all duration-300 font-semibold hover:text-white hover:underline hover:underline-offset-[6px] hover:decoration-2"
+                                    className="relative px-2 transition-all duration-300 font-semibold hover:text-[color:var(--color-primary)] hover:underline hover:underline-offset-[6px] hover:decoration-2"
                                 >
                                     {label}
                                 </NavLink>
                             ))}
                         </ul>
 
-                        <Link to="/cart" className="relative">
-                            <div className="flex items-center gap-2 text-white">
-                                <MdShoppingCart className="text-3xl" />
-                                <div className="flex items-center">
-                                    <span className="text-sm font-semibold">0.00</span>
-                                    <span className="text-xs">(0 items)</span>
-                                </div>
-                                {cartCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
-                                        {cartCount}
-                                    </span>
-                                )}
+                            <div className="flex items-center gap-2 text-black">
+                                <p>Contact: (808) 555-0111</p>
+                                
                             </div>
-                        </Link>
-
                     </div>
 
                 </div>
 
                 {isNavOpen && (
                     <div className="block sm:hidden bg-[#023e8a] px-4 py-2">
-                        <ul className="flex flex-col gap-4 text-white text-sm font-medium">
+                        <ul className="flex flex-col gap-4 text-black text-sm font-medium">
                             {NAV_LINKS.map(({ path, label }) => (
                                 <NavLink
                                     key={path}
                                     to={path}
                                     onClick={() => setIsNavOpen(false)}
-                                    className="block px-4 py-2 transition-all duration-300 text-center font-semibold hover:bg-[#064490] rounded-md"
+                                    className="block px-4 py-2 transition-all duration-300 text-center font-semibold hover:bg-[color:var(--color-primary)] rounded-md"
                                 >
                                     {label}
                                 </NavLink>
