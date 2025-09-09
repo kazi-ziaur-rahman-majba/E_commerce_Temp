@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import Marquee from 'react-fast-marquee';
 import { GrAnnounce } from "react-icons/gr";
 import { FaExclamationCircle } from "react-icons/fa";
@@ -25,6 +24,9 @@ const Header = () => {
                     <div className="hidden sm:block text-center">
                         <Marquee speed={100} gradient={false} pauseOnHover={true} direction="right" className="text-xs md:text-sm">
                             <GrAnnounce className="text-sm mr-1" />
+                            <p className="flex text-white gap-x-4">
+                                <span>Free shipping on all orders over $50</span>
+                            </p>
                             <p className="flex text-white gap-x-4">
                                 <span>Free shipping on all orders over $50</span>
                             </p>
